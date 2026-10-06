@@ -11,11 +11,12 @@ public class TestBase
     public async Task SetUp()
     {
         Playwright = await Microsoft.Playwright.Playwright.CreateAsync();
+        var isCI = Environment.GetEnvironmentVariable("CI") == "true";
 
         Browser = await Playwright.Chromium.LaunchAsync(
             new BrowserTypeLaunchOptions
             {
-                Headless = false
+                Headless = isCI
             });
 
         Page = await Browser.NewPageAsync();
