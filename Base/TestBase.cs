@@ -1,4 +1,5 @@
 ﻿using Microsoft.Playwright;
+using PlaywrightAutomation.Pages;
 namespace PlaywrightAutomation;
 
 public class TestBase
@@ -25,7 +26,15 @@ public class TestBase
     [TearDown]
     public async Task TearDown()
     {
-        // await Browser.CloseAsync();
-        // Playwright.Dispose();
+        await Browser.CloseAsync();
+        Playwright.Dispose();
+    }
+
+    protected async Task LoginToApplicationAsync()
+    {
+        var loginPage = new LoginPage(Page);
+
+        await loginPage.NavigateAsync();
+        await loginPage.LoginAsync("Admin", "admin123");
     }
 }

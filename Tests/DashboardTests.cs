@@ -3,14 +3,13 @@ using Microsoft.Playwright;
 
 namespace PlaywrightAutomation.Tests;
 
-public class LoginTests : TestBase
+public class DashboardTests : TestBase
 {
     [Test]
-    public async Task VerifyLogin()
+    public async Task VerifyDashboard()
     {
         await LoginToApplicationAsync();
 
-        // Verify that login was successful
         await Assertions.Expect(Page)
             .ToHaveURLAsync(new Regex("dashboard"));
     }
